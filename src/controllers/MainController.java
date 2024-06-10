@@ -178,7 +178,12 @@ public class MainController {
                         while (loginAttemp < LOGIN_ATTEMPT) {
                             loginData = loginView.login();
                             if (loginService.validateLoginCustomer(loginData)) {
-                                customer = customerRepo.getCustomerByAccountName(loginData[0]);
+                                result = customerRepo.checkVerify(loginData[0]);
+                                if(result) {
+                                    customer = customerRepo.getCustomerByAccountName(loginData[0]);
+                                } else {
+                                    loginView.inactivateView();
+                                }
                                 break;
                             }
                             loginAttemp++;

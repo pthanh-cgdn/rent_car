@@ -82,4 +82,14 @@ public class CustomerRepository {
         }
         writeToFile(customers, PATH_CUSTOMER);
     }
+
+    public boolean checkVerify(String AccountName) {
+        ArrayList<Customer> customers = getAll();
+        for (Customer customer : customers) {
+            if (customer.getAccountName().equals(AccountName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
