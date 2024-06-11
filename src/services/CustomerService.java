@@ -32,4 +32,8 @@ public class CustomerService {
     public String viewOrder(String customerId) {
         return orderRepo.viewOrderByCustomerId(customerId);
     }
+
+    public ArrayList<Cars> searchByDate(String[] rentDate) {
+        return carRepo.searchByDate(rentDate);
+    }
 }

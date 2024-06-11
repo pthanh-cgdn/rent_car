@@ -1,7 +1,6 @@
 package controllers;
 
 import models.*;
-import repositories.CustomerRepository;
 import services.AdminService;
 import services.CustomerService;
 import services.LoginService;
@@ -95,6 +94,7 @@ public class MainController {
         String[] carName;
         Order order;
         boolean result;
+        String[] rentDate;
 
         if (customer != null) {
             CustomerView customerView = new CustomerView(customer);
@@ -112,6 +112,12 @@ public class MainController {
                         customerView.view(carList);
                         break;
                     case 3:
+                        rentDate = customerView.searchByDate();
+                        cars = customerService.searchByDate(rentDate);
+                        carList = customerService.view(cars);
+                        customerView.view(carList);
+                        break;
+                    case 4:
                         order = customerView.rentView();
                         confirm = customerView.confirmOrder(order);
                         if (confirm) {
@@ -119,7 +125,7 @@ public class MainController {
                             customerView.orderStatusView(result);
                         }
                         break;
-                    case 4:
+                    case 5:
                         orderList = customerService.viewOrder(customer.getId());
                         customerView.view(orderList);
                         break;
@@ -136,7 +142,6 @@ public class MainController {
         Admin admin = null;
         int choice;
         LoginService loginService = new LoginService();
-        CustomerRepository customerRepo = new CustomerRepository();
         boolean result;
         String[] loginData;
         String[] register;
@@ -178,9 +183,9 @@ public class MainController {
                         while (loginAttemp < LOGIN_ATTEMPT) {
                             loginData = loginView.login();
                             if (loginService.validateLoginCustomer(loginData)) {
-                                result = customerRepo.checkVerify(loginData[0]);
+                                result = loginService.checkVerify(loginData[0]);
                                 if(result) {
-                                    customer = customerRepo.getCustomerByAccountName(loginData[0]);
+                                    customer = loginService.getCustomerByAccountName(loginData[0]);
                                 } else {
                                     loginView.waitToVerifyAccount();
                                 }

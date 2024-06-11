@@ -21,4 +21,12 @@ public class LoginService {
         customerRepository.addCustomer(customer);
         return true;
     }
+
+    public boolean checkVerify(String loginDatum) {
+        return customerRepository.checkVerify(loginDatum);
+    }
+
+    public Customer getCustomerByAccountName(String loginDatum) {
+        return customerRepository.getCustomerByAccountName(loginDatum);
+    }
 }

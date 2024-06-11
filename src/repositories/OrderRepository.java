@@ -35,7 +35,7 @@ public class OrderRepository {
             if (order.getCarId().equals(o.getCarId())) {
                 startDay2 = new Date(Integer.parseInt(o.getStartDate().substring(0,2)),Integer.parseInt(o.getStartDate().substring(3,5)),Integer.parseInt(o.getStartDate().substring(6,10)));
                 endDay2 = new Date(Integer.parseInt(o.getEndDate().substring(0,2)),Integer.parseInt(o.getEndDate().substring(3,5)),Integer.parseInt(o.getEndDate().substring(6,10)));
-                if((startDay1.before(endDay2)&&startDay1.after(startDay2))||(endDay1.before(endDay2)&&endDay1.before(startDay2))) {
+                if((!startDay1.after(endDay2)&&!startDay1.before(startDay2))||(!endDay1.after(endDay2)&&!endDay1.before(startDay2))) {
                     return false;
                 }
             }

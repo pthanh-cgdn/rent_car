@@ -2,9 +2,11 @@ package repositories;
 
 import models.Cars;
 import models.DuplicateCarIdException;
+import models.Order;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CarRepository {
@@ -120,4 +122,28 @@ public class CarRepository {
         return carList;
     }
 
+    public ArrayList<Cars> searchByDate(String[] rentDate) {
+        ArrayList<Cars> cars = getAll();
+        ArrayList<Cars> cars2 = new ArrayList<>();
+        OrderRepository orderRepository = new OrderRepository();
+        ArrayList<Order> orders = orderRepository.getAll();
+        Date startDay = new Date(Integer.parseInt(rentDate[0].substring(0,2)),Integer.parseInt(rentDate[0].substring(3,5)),Integer.parseInt(rentDate[0].substring(6,10)));
+        Date endDay = new Date(Integer.parseInt(rentDate[1].substring(0,2)),Integer.parseInt(rentDate[1].substring(3,5)),Integer.parseInt(rentDate[1].substring(6,10)));
+        Date startDay2 = new Date();
+        Date endDay2 = new Date();
+        ArrayList<String> carList = new ArrayList<>();
+        for (Order o:orders){
+            startDay2 = new Date(Integer.parseInt(o.getStartDate().substring(0,2)),Integer.parseInt(o.getStartDate().substring(3,5)),Integer.parseInt(o.getStartDate().substring(6,10)));
+            endDay2 = new Date(Integer.parseInt(o.getEndDate().substring(0,2)),Integer.parseInt(o.getEndDate().substring(3,5)),Integer.parseInt(o.getEndDate().substring(6,10)));
+            if((!startDay.after(endDay2)&&!startDay.before(startDay2))||(!endDay.after(endDay2)&&!endDay.before(startDay2))){
+                carList.add(o.getCarId());
+            }
+        }
+        for (Cars car: cars){
+            if (!carList.contains(car.getId())&&car.isAvailable()) {
+                cars2.add(car);
+            }
+        }
+        return cars2;
+    }
 }

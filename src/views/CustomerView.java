@@ -20,13 +20,14 @@ public class CustomerView {
         System.out.println("Please select an option:");
         System.out.println("1. View available Car");
         System.out.println("2. Search a Car by Car Brand & Car Name");
-        System.out.println("3. Rent a Car");
-        System.out.println("4. View your order");
+        System.out.println("3. Search available Cars by start and end date");
+        System.out.println("4. Rent a Car");
+        System.out.println("5. View your order");
         System.out.println("0. Back to main menu");
         do {
             System.out.println("Please input your choice");
             choice = input.nextLine();
-        } while (!choice.matches("[0-4]"));
+        } while (!choice.matches("[0-5]"));
         return Integer.parseInt(choice);
     }
 
@@ -66,5 +67,13 @@ public class CustomerView {
         } else {
             System.out.println("Your order status is fail. Please try again");
         }
+    }
+
+    public String[] searchByDate() {
+        System.out.println("Please input start date:");
+        String startDate = checkDateFormat();
+        System.out.println("Please input end date:");
+        String endDate = checkAndCompareDay(startDate);
+        return new String[]{startDate,endDate};
     }
 }
