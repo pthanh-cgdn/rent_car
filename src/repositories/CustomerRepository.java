@@ -87,7 +87,7 @@ public class CustomerRepository {
         ArrayList<Customer> customers = getAll();
         for (Customer customer : customers) {
             if (customer.getAccountName().equals(AccountName)) {
-                return true;
+                return customer.isVerified();
             }
         }
         return false;

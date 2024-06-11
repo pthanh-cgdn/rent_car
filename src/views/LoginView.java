@@ -64,7 +64,7 @@ public class LoginView {
     }
 
     public void waitToVerifyAccount() {
-        System.out.println("Please wait for your account to be verified");
+        System.out.println("Please wait for your account verification");
     }
 
     public void inactivateView() {

@@ -182,7 +182,7 @@ public class MainController {
                                 if(result) {
                                     customer = customerRepo.getCustomerByAccountName(loginData[0]);
                                 } else {
-                                    loginView.inactivateView();
+                                    loginView.waitToVerifyAccount();
                                 }
                                 break;
                             }
