@@ -22,6 +22,7 @@ public class MainController {
         String orderList;
         boolean confirm;
         String customerList;
+        String[] orderStatus;
         ArrayList<String> accountNames = new ArrayList<>();
 
         if (admin != null) {
@@ -78,6 +79,11 @@ public class MainController {
                         accountNames.addAll(Arrays.asList(adminView.verifyCustomerView())) ;
                         adminService.verifyCustomer(accountNames, admin);
                         break;
+                    case 8:
+                        orderStatus = adminView.viewOrderStatus();
+                        result = adminService.updateOrderStatus(orderStatus);
+                        adminView.showMessage(result);
+                        break;
                     case 0:
                         return;
                 }
@@ -90,11 +96,13 @@ public class MainController {
         CustomerService customerService = new CustomerService();
         String carList;
         String orderList;
+        String[] orderId;
         boolean confirm;
         String[] carName;
         Order order;
         boolean result;
         String[] rentDate;
+        int rentAmount;
 
         if (customer != null) {
             CustomerView customerView = new CustomerView(customer);
@@ -119,6 +127,8 @@ public class MainController {
                         break;
                     case 4:
                         order = customerView.rentView();
+                        rentAmount = customerService.getRentAmount(order);
+                        order.setRentAmount(rentAmount);
                         confirm = customerView.confirmOrder(order);
                         if (confirm) {
                             result = customerService.addOrder(order, customer.getId());
@@ -128,6 +138,10 @@ public class MainController {
                     case 5:
                         orderList = customerService.viewOrder(customer.getId());
                         customerView.view(orderList);
+                        break;
+                    case 6:
+                        orderId = customerView.viewRateOrder();
+                        customerService.rateCar(orderId,customer.getId());
                         break;
                     case 0:
                         return;

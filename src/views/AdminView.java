@@ -23,11 +23,12 @@ public class AdminView {
         System.out.println("5. View all orders");
         System.out.println("6. View all customer");
         System.out.println("7. Verify customer");
+        System.out.println("8. Update order status");
         System.out.println("0. Back to main menu");
         do {
             System.out.println("Please input your choice");
             choice = input.nextLine();
-        } while(!choice.matches("[0-7]"));
+        } while(!choice.matches("[0-8]"));
         return Integer.parseInt(choice);
     }
 
@@ -126,5 +127,21 @@ public class AdminView {
         System.out.println("Please enter the customer account name: (seperate by ',')");
         String customerName = input.nextLine();
         return customerName.split(",");
+    }
+
+    public String[] viewOrderStatus() {
+        Scanner input = new Scanner(System.in);
+        String orderStatus;
+        System.out.println("Please enter the order id:");
+        String orderId = input.nextLine();
+        System.out.println("Please update order status: ");
+        System.out.println("0. Cancel");
+        System.out.println("1. Start");
+        System.out.println("2. Completed");
+        do {
+            System.out.println("Please input your choice");
+            orderStatus = input.nextLine();
+        } while(!orderStatus.matches("[0-2]"));
+        return new String[] {orderId,orderStatus};
     }
 }

@@ -32,9 +32,16 @@ public class LoginView {
 
 
     public boolean currentUserConfirm() {
+        String choice;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Do you already have account? (Y for Yes, N for No)");
-        return scanner.nextLine().equalsIgnoreCase("Y");
+        do{
+            choice = scanner.nextLine();
+            if(!choice.matches("[YN]")){
+                System.out.println("Please input your choice");
+            }
+        } while(!choice.matches("[YN]"));
+        return choice.equals("Y");
     }
 
     public String[] registerView() {

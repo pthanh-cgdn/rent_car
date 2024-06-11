@@ -49,4 +49,8 @@ public class AdminService {
     public void verifyCustomer(ArrayList<String> accountNames, Admin admin) {
         customerRepo.verifyCustomer(accountNames,admin);
     }
+
+    public boolean updateOrderStatus(String[] orderStatus) {
+        return orderRepo.updateOrderStatus(orderStatus);
+    }
 }

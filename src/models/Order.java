@@ -10,6 +10,8 @@ public class Order implements Serializable {
     private String startDate;
     private String endDate;
     private int rentAmount;
+    private String status = "Pending";
+    private int customerRate;
 
     public Order(String carId, String startDate, String endDate) {
         this.carId = carId;
@@ -71,8 +73,25 @@ public class Order implements Serializable {
         this.id = id;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) throws UpdateStatusException {
+        if (this.status.equals("Cancel") || this.status.equals("Completed") || (this.status.equals("Start") && !status.equals("Completed"))|| status == null) throw new UpdateStatusException();
+        this.status = status;
+    }
+
+    public int getCustomerRate() {
+        return customerRate;
+    }
+
+    public void setCustomerRate(int customerRate) {
+        this.customerRate = customerRate;
+    }
+
     public String toString(){
-        return getId() + "," + customerId + "," + carId + "," + startDate + "," + endDate;
+        return getId() + "," + customerId + "," + carId + "," + startDate + "," + endDate+ "," + rentAmount + "," + status + "," + customerRate;
     }
 
 }

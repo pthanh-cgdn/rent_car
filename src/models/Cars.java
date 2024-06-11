@@ -14,7 +14,7 @@ public class Cars implements Serializable {
     private int seats;
     private boolean isAvailable = true;
     private int trips;
-    private byte rating;
+    private float rating;
     private int rentPrice;
 
     public Cars(String carId,String brand, String name, String model, int manufactureYear, String color, int seats, int rentPrice) {
@@ -88,7 +88,11 @@ public class Cars implements Serializable {
         return trips;
     }
 
-    public byte getRating() {
+    public void setTrips(int trips) {
+        this.trips = trips;
+    }
+
+    public float getRating() {
         return rating;
     }
 
@@ -117,8 +121,13 @@ public class Cars implements Serializable {
         this.id = "car-"+id;
     }
 
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+
     public String toString() {
-       return getId()+","+getCarId()+","+getBrand()+","+getName()+","+getModel()+","+getManufactureYear()+","+getColor()+","+getSeats()+","+getRentPrice()+","+isAvailable()+","+getTrips()+","+getRating();
+       return "CarId: "+getId()+", Car plate number: "+getCarId()+", Car brand: "+getBrand()+", Car name: "+getName()+", Car model: "+getModel()+", Car manufacture year: "+getManufactureYear()+", Car color: "+getColor()+", Car seat: "+getSeats()+", Car rent price: "+getRentPrice()+", Car availability: "+isAvailable()+", Car's completed trip: "+getTrips()+", Car's Rating: "+getRating();
     }
 
 }
